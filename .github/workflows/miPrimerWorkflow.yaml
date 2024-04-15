@@ -6,7 +6,7 @@ jobs:
     echo-hello:
         runs-on: ubuntu-latest
         steps:
-            - name:
+            - name: hello world
               run: echo "hello World"
     multi-line_bash:
         runs-on: ubuntu-latest
