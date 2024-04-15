@@ -3,16 +3,14 @@ on:
     - push
     - workflow_dispatch
 jobs:
-    job1:
+    echo-hello:
         runs-on: ubuntu-latest
         steps:
-            - name: echo-hello
-              run: echo "hello World"
-    job2:
+            - run: echo "hello World"
+    multi-line_bash:
         runs-on: ubuntu-latest
         steps:
-            - name: multi-line bash
-              run: |
+            - run: |
                echo "I am"
                echo "a multiline"
                echo "script"
