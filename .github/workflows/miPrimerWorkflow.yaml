@@ -1,0 +1,20 @@
+name: My first workflow
+on:
+    - push
+    - workflow_dispatch
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: echo-hello
+              run: echo "hello World"
+    job2:
+        runs-on: ubuntu-latest
+        steps:
+            - name: multi-line bash
+              run: |
+               echo "I am"
+               echo "a multiline"
+               echo "script"
+            - name: echo-goodbye
+              run: echo "Bye!"
