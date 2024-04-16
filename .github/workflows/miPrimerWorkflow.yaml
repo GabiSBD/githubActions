@@ -16,5 +16,6 @@ jobs:
                echo "I am"
                echo "a multiline"
                echo "script"
+               exit 1
             - name: echo-goodbye
               run: echo "Bye!"
