@@ -12,4 +12,6 @@ jobs:
               with:
                 node-version: '20.x'
             - name: install dependencies
-              run: npm ci
+              run: |
+               cd my-app
+               npm ci
