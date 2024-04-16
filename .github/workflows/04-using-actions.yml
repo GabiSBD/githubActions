@@ -8,4 +8,4 @@ jobs:
             - name: Checkout Code
               uses: actions/checkout@v4
             - name: print struct folder
-              run: echo "ls"
+              run: ls
