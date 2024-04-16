@@ -1,5 +1,9 @@
 name: 02 - Eventos
-on: push
+on: 
+    push:
+    schedule:
+        - cron: '* * * * *'
+    workflow_dispatch:
 
 jobs:
     echo:
@@ -8,3 +12,4 @@ jobs:
             - name: showTrigger
               run: | 
                echo "Event name: ${{ github.event_name }}"
+    
