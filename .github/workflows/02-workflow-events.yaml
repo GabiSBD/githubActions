@@ -1,6 +1,6 @@
 name: 02 - Eventos
 on: 
-    push:
+    #push:
     schedule:
         - cron: '10 * * * *'
     workflow_dispatch:
