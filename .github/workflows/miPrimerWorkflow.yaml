@@ -1,6 +1,6 @@
 name: My first workflow
 on:
-    - push
+    #- push
     - workflow_dispatch
 jobs:
     echo-hello:
