@@ -1,4 +1,4 @@
-name: 10 - Using Functions
+name: 10 - Using FunctionsB
 on:
     pull_request: 
     workflow_dispatch: 
