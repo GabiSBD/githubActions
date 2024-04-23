@@ -9,7 +9,7 @@ jobs:
             - name: sleep
               run: |
                 sleep 20
-                0
+                echo "ok"
             - name: Failing step
               run: 1
 
