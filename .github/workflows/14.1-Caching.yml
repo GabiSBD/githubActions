@@ -1,0 +1,49 @@
+name: 14 - Using Cache
+on: 
+    workflow_dispatch: 
+        inputs:
+            use-cache:
+                type: boolean
+                default: false
+                description: caché
+
+            node-version:
+                type: choice
+                options: ['18.x', '20.x', '21.x']
+                default: '20.x'
+                description: node version
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: my-app
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+
+            - name: setup node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{inputs.node-version}}
+
+            - name: Download cached dependencies
+              id: cache
+              if: inputs.use-cache
+              uses: actions/cache@v3
+              with:
+                path: my-app/node_modules
+                key: deps-node-modules-${{ hashFiles('my-app/package-lock.json') }} 
+
+            - name: install dependencies
+              if: steps.cache.outputs.cache-hit == 'true'
+              run: npm ci
+
+            - name: run test
+              run: npm run test
+            
+            - name: Building
+              run: npm run build
+            
+            - name: Deploying to nonprod
+              run: echo "Deploying to nonprod"
