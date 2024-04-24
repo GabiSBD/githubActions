@@ -9,9 +9,9 @@ jobs:
             - name: sleep
               run: |
                 sleep 20
-                echo "ok"
+                exit 0
             - name: Failing step
-              run: 1
+              run: exit 1
 
             - name: I will be skipped
               if: success()
