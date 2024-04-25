@@ -7,7 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         name: ${{matrix.os}}-${{matrix.node}}
         strategy:
-            fail-fast: true
+            fail-fast: true #cancela lo que venga detras de un error
             matrix:
                 node: ['18.x', '20.x' , '21.x']
                 os: 
