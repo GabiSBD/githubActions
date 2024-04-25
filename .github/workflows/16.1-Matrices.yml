@@ -19,6 +19,9 @@ jobs:
                     - os: windows-latest
                       node: '20.x'
                       tag: experimental
+                exclude:
+                    - os: ubuntu-latest
+                      node: '20.x'
         steps:
             - name: Setup node
               run: echo "set up node ${{matrix.node}}"
