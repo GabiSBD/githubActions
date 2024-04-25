@@ -14,9 +14,8 @@ jobs:
                     - windows-latest
         steps:
             - name: Setup node
-              uses: action/setup-node@v4
-              with:
-                node-version: ${{matrix.node}}
+              run: set up node ${{matrix.node}}
+              
 
             - name: Perform some tests
               run: "Running tests on OS ${{matrix.os}} and NodeJS ${{matrix.node}}"
