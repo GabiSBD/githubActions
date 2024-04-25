@@ -18,4 +18,4 @@ jobs:
               
 
             - name: Perform some tests
-              run: "Running tests on OS ${{matrix.os}} and NodeJS ${{matrix.node}}"
+              run: echo "Running tests on OS ${{matrix.os}} and NodeJS ${{matrix.node}}"
