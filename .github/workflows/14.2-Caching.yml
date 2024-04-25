@@ -52,4 +52,63 @@ jobs:
             - name: Deploying to nonprod
               run: echo "Deploying to nonprod"
         outputs:
-          CACHE_KEY: ${{steps.Calculate_cache_key.outputs.CACHE_KEY}}
+            deps-cache-key: ${{steps.cache-key.outputs.CACHE_KEY}}
+    build:
+        runs-on: ubuntu-latest
+        needs: install-deps
+        defaults:
+         run:
+           working-directory: my-app
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+
+            - name: setup node
+              uses: actions/setup-node@v4
+              with:
+                    node-version: ${{inputs.node-version}}
+
+            - name: Download cached dependencies
+              id: cache
+              if: inputs.use-cache
+              uses: actions/cache@v3
+              with:
+                path: my-app/node_modules
+                key: ${{needs.install-deps.outputs.deps-cache-key}}
+
+            - name: run test
+              run: npm run test
+            
+            - name: Building
+              run: npm run build
+            
+            - name: Deploying to nonprod
+              run: echo "Deploying to nonprod"
+            
+    linting: 
+          runs-on: ubuntu-latest
+          needs: install-deps
+          defaults:
+            run:
+                working-directory: my-app
+          steps:
+            - name: Checkout cod
+              uses: actions/checkout@v4
+            
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                node-version: ${{inputs.node-version}}
+
+            - name: step Download cached dependencies
+              uses: actions/cache@v3
+              with:
+                path: my-app/node_modules
+                key: ${{needs.install-deps.outputs.deps-cache-key}}
+
+            - name: Testing
+              run: npm run test
+
+            - name: linting
+              run: echo "Linting..."
+
