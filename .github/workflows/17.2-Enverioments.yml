@@ -1,6 +1,8 @@
 name: 17.2 - Working with Environments
 on:
     workflow_dispatch: 
+env:
+    my-env-value: 'variable not found'
 
 jobs:
     deploy-pre:
@@ -25,10 +27,11 @@ jobs:
         needs: e2e-tests
         environment: pro
         env:
-            my-env-value: ${{vars.MY_ENV_VALUE && vars.MY_ENV_VALUE || 'variable not found'}}
+            my-env-value: ${{vars.MY_ENV_VALUE && vars.MY_ENV_VALUE || github.env.my-env-value}}
         steps:
             - name: ${{env.my-env-value}}
               run: |
                 echo "deploying pro"
                 sleep 10
                 exit 0
+                
