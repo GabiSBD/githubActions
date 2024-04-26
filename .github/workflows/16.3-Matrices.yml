@@ -22,7 +22,7 @@ jobs:
                 exclude:
                     - os: ubuntu-latest
                       node: '20.x'
-                    - tag: experimental
+            
         steps:
             - name: Setup node
               run: echo "set up node ${{matrix.node}}"
