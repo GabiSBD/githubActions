@@ -14,29 +14,29 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Setup NodeJS version $INPUT_NODE_VERSION
+    - name: Setup NodeJS version ${{INPUT_NODE_VERSION}}
       shell: bash
-      run: npm init --yes --version $INPUT_NODE_VERSION
+      run: npm init --yes --version ${{INPUT_NODE_VERSION}}
       
     
     - name: Cache dependencies
       id: cache
       shell: bash
-      working-directory: $INPUT_WORKING_DIR
+      working-directory: ${{INPUT_WORKING_DIR}}
       run: |
         if [ -f "package-lock.json" ]; then
-          echo "package-lock.json encontrado en $DIRECTORY"
+          echo "package-lock.json encontrado en ${{INPUT_WORKING_DIR}}"
           echo "Almacenando en caché package-lock.json..."
-          CACHE_KEY="$INPUT_TARGET_ENV-node-modules-${{ hashFiles('my-app/package-lock.json') }}"
+          CACHE_KEY="${{INPUT_TARGET_ENV}}-node-modules-${{ hashFiles('my-app/package-lock.json')}}"
           CACHE_PATH="/node_modules"
           echo "::set-output name=cache-hit::true"
         else
-            echo "No se encontró package-lock.json en $DIRECTORY"
+            echo "No se encontró package-lock.json en ${{INPUT_WORKING_DIR}}"
             echo "::set-output name=cache-hit::false"
         fi
       
     - name: Install dependencies
       shell: bash
       if: steps.cache.outputs.cache-hit != 'true'
-      working-directory: $INPUT_WORKING_DIR
-      run: npm ci --omit=$INPUT_TARGET_ENV
+      working-directory: ${{INPUT_WORKING_DIR}}
+      run: npm ci --omit=${{INPUT_TARGET_ENV}}
