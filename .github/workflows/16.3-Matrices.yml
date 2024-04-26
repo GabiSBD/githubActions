@@ -22,7 +22,8 @@ jobs:
                 exclude:
                     - os: ubuntu-latest
                       node: '20.x'
-            
+                    - tag: experimental
+                    #falla por conflixto por includes y excludes tag
         steps:
             - name: Setup node
               run: echo "set up node ${{matrix.node}}"
