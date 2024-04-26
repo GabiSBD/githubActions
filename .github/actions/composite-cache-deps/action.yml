@@ -16,19 +16,24 @@ runs:
   steps:
     - name: Setup NodeJS version $INPUT_NODE_VERSION
       shell: bash
-      uses: actions/setup-node@v4
-      with:
-        node-version: $INPUT_NODE_VERSION
+      run: npm init --yes --version $INPUT_NODE_VERSION
       
     
     - name: Cache dependencies
       id: cache
       shell: bash
       working-directory: $INPUT_WORKING_DIR
-      uses: actions/cache@v3
-      with:
-        path: /node_modules
-        key: $INPUT_TARGET_ENV-node-modules-${{ hashFiles('my-app/package-lock.json') }}
+      run: |
+        if [ -f "/package-lock.json" ]; then
+          echo "package-lock.json encontrado en $DIRECTORY"
+          echo "Almacenando en caché package-lock.json..."
+          CACHE_KEY="$INPUT_TARGET_ENV-node-modules-${{ hashFiles('my-app/package-lock.json') }}"
+          CACHE_PATH="/node_modules"
+          echo "::set-output name=cache-hit::true"
+        else
+            echo "No se encontró package-lock.json en $DIRECTORY"
+            echo "::set-output name=cache-hit::false"
+        fi
       
     - name: Install dependencies
       shell: bash
