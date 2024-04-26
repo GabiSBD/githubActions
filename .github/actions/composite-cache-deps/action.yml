@@ -24,7 +24,7 @@ runs:
       shell: bash
       working-directory: $INPUT_WORKING_DIR
       run: |
-        if [ -f "/package-lock.json" ]; then
+        if [ -f "package-lock.json" ]; then
           echo "package-lock.json encontrado en $DIRECTORY"
           echo "Almacenando en caché package-lock.json..."
           CACHE_KEY="$INPUT_TARGET_ENV-node-modules-${{ hashFiles('my-app/package-lock.json') }}"

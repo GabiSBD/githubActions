@@ -27,7 +27,7 @@ jobs:
               uses: ./.github/actions/composite-cache-deps
               with:
                   node-version: 18.x
-                  working-dir: my-app
+                  working-dir: my-app/
                   target-env: dev
 
             - name: Test
