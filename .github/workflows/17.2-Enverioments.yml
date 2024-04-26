@@ -1,0 +1,34 @@
+name: 17.2 - Working with Environments
+on:
+    workflow_dispatch: 
+
+jobs:
+    deploy-pre:
+        runs-on: ubuntu-latest
+        environment: pre
+        steps:
+            - name: deploy
+              run: |
+               echo "Deploying to PRE"
+               sleep 7
+               exit 0
+               
+    e2e-tests:
+        runs-on: ubuntu-latest
+        needs: deploy-pre
+        steps:
+            - name: E2E tests
+              run: echo "running E2E tests"
+    
+    deploy-pro:
+        runs-on: ubuntu-latest
+        needs: e2e-tests
+        environment: pro
+        env:
+            my-env-value: ${{vars.MY_ENV_VALUE && vars.MY_ENV_VALUE || 'variable not found'}}
+        steps:
+            - name: ${{env.my-env-value}}
+              run: |
+                echo "deploying pro"
+                sleep 10
+                exit 0
