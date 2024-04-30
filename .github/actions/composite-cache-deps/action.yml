@@ -22,7 +22,7 @@ runs:
       id: Cache
       with:
         path: ${{inputs.working-dir}}/node_modules
-        key: ${{inputs.target-env}}-node-${{ hashFiles('**/package-lock.json') }}
+        key: ${{inputs.target-env}}-node-${{ hashFiles('my-app/package-lock.json') }}
         restore-keys: |
           ${{inputs.target-env}}-node-
     - name: install dep
