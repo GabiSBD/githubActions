@@ -9,7 +9,7 @@ jobs:
     recall:
         runs-on: ubuntu-latest
         steps:
-          - uses: .github/workflows/15-Artifacts.yml
+          - uses: ./.github/workflows/15-Artifacts.yml
             with:
                 working-dir: ${{inputs.working-dir}}
         

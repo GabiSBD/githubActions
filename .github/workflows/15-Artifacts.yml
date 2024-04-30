@@ -2,7 +2,7 @@ name: 15 - Working with Artifacts
 on: 
     workflow_dispatch:
       inputs:
-        workind-dir:
+        working-dir:
           type: string
           required: true
     workflow_call: 
@@ -16,7 +16,7 @@ jobs:
         runs-on: ubuntu-latest
         defaults:
             run:
-                working-directory: ${{inputs.workind-dir}}
+                working-directory: ${{inputs.working-dir}}
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
             - name: Upload build files
               uses: actions/upload-artifact@v4
               with:
-                path: ${{inputs.workind-dir}}
+                path: ${{inputs.working-dir}}
                 name: miApp
             
     deploy:
