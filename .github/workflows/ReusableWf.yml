@@ -1,0 +1,15 @@
+name: Using Reusable WorkFlow
+on:
+    workflow_dispatch: 
+        inputs:
+            working-dir:
+                type: string
+                required: true
+jobs:
+    recall:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: ./.github/workflows/15-Artifacts.yml
+            with:
+                working-dir: ${{inputs.working-dir}}
+        
