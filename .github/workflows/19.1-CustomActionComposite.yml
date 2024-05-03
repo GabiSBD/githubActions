@@ -42,10 +42,10 @@ jobs:
                 working-directory: ${{env.working-directory}}
         steps:
             - name: Download
-              uses: actions/dowload-artifact@v3
+              uses: actions/dowload-artifact@v4
               with:
                   name: myApp
-                  path: .
+                  path: build
             
             
             
